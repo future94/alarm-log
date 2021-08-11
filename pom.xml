@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.future94</groupId>
+    <artifactId>alarm-log</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>alarm-log-core</module>
+        <module>alarm-log-examples</module>
+        <module>alarm-log-warn</module>
+        <module>alarm-log-common</module>
+        <module>alarm-log-starter</module>
+        <module>alarm-log-aspect</module>
+    </modules>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/future94/alarm-log</url>
+        <connection>scm:git:https://github.com/future94/alarm-log.git</connection>
+        <developerConnection>scm:git:https://github.com/future94/alarm-log.git</developerConnection>
+        <tag>${project.version}</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/future94/alarm-log/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>future94</id>
+            <name>wei lai</name>
+            <url>https://github.com/future94</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j-log4j12.version>1.6.1</slf4j-log4j12.version>
+        <mail.version>1.4.7</mail.version>
+        <spring-boot.version>2.4.4</spring-boot.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j-log4j12.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:profile/application.properties"/>
+
+    <bean id="mailWarnService" class="com.future94.alarm.log.warn.mail.MailWarnService">
+            <constructor-arg index="0" value="${alarmLog.warn.mail.smtpHost}"/>
+            <constructor-arg index="1" value="${alarmLog.warn.mail.smtpPort}"/>
+            <constructor-arg index="2" value="${alarmLog.warn.mail.to}"/>
+            <constructor-arg index="3" value="${alarmLog.warn.mail.from}"/>
+            <constructor-arg index="4" value="${alarmLog.warn.mail.username}"/>
+            <constructor-arg index="5" value="${alarmLog.warn.mail.password}"/>
+    </bean>
+
+    <bean id="dingtalkWarnService" class="com.future94.alarm.log.warn.dingtalk.DingtalkWarnService">
+        <constructor-arg index="0" value="${alarmLog.warn.dingtalk.token}"/>
+        <constructor-arg index="1" value="${alarmLog.warn.dingtalk.secret}"/>
+    </bean>
+
+    <bean id="workWeixinWarnService" class="com.future94.alarm.log.warn.workweixin.WorkWeixinWarnService">
+        <constructor-arg index="0" value="${alarmLog.warn.workweixin.to}"/>
+        <constructor-arg index="1" value="${alarmLog.warn.workweixin.applicationId}"/>
+        <constructor-arg index="2" value="${alarmLog.warn.workweixin.corpid}"/>
+        <constructor-arg index="3" value="${alarmLog.warn.workweixin.corpsecret}"/>
+    </bean>
+
+    <bean id="factory" class="com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory">
+        <constructor-arg>
+            <list>
+                <ref bean="mailWarnService" />
+                <ref bean="dingtalkWarnService" />
+                <ref bean="workWeixinWarnService" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.cache.AlarmLogContext">
+        <property name="warnExceptionExtend" value="true" />
+        <property name="doWarnExceptionList">
+            <list>
+                <value>java.lang.Exception</value>
+                <value>java.lang.RuntimeException</value>
+            </list>
+        </property>
+    </bean>
+</beans>

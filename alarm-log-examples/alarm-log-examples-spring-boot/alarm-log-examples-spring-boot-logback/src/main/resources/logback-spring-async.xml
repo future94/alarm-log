@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="AlarmLog" class="com.future94.alarm.log.core.enhance.logback.AlarmLogLogbackAsyncAppender">
+        <warnExceptionExtend>false</warnExceptionExtend>
+        <doWarnException>java.lang.Exception,java.lang.RuntimeException</doWarnException>
+        <appender-ref ref="Console"/>
+    </appender>
+
+    <appender name="AsyncConsole" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="Console"/>
+    </appender>
+
+
+    <appender name="AsyncAlarmLog" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="AlarmLog"/>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="AsyncConsole" />
+        <appender-ref ref="AsyncAlarmLog" level="ERROR" />
+    </root>
+</configuration>

@@ -1,0 +1,26 @@
+spring:
+    alarm-log:
+        warn:
+            mail:
+                enabled: false
+                smtpHost: smtp.exmail.qq.com
+                smtpPort: 465
+                to: 352342845@qq.com
+                from: support@fortunetech.com.hk
+                username: support@fortunetech.com.hk
+                password: MAAkccPk2I
+            workweixin:
+                enabled: false
+                to: WeiLai,endlezz
+                applicationId: 1000002
+                corpid: ww6429827db02fabe7
+                corpsecret: "sQlnPi1aa6p_TG5e-88kkd7O5ib3vEc4V9WJfq85Gfo"
+            dingtalk:
+                enabled: true
+                token: 08a8d4aa65311e1b4b6881a5127a821b4cc81221da1344f9bdda789ed5fcd24c
+                secret: SEC4370b0ee45f2ab5c15afdef01cbe3317fe4dd45abf5946a267927cf99f996510
+        warn-exception-extend: false
+        do-warn-exception:
+            - java.lang.Throwable
+server:
+    port: 8191

@@ -1,0 +1,117 @@
+{
+  "properties": [
+    {
+      "name": "spring.alarm-log.do-warn-exception",
+      "type": "java.util.List<java.lang.String>",
+      "description": "do warn exception list.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.dingtalk.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "enabled send dingtalk robot.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.DingtalkConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.dingtalk.token",
+      "type": "java.lang.String",
+      "description": "send dingtalk robot token.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.DingtalkConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.dingtalk.secret",
+      "type": "java.lang.String",
+      "description": "send dingtalk robot secret.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.DingtalkConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.workweixin.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "enabled send workweixin robot.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.WorkWeixinConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.workweixin.to",
+      "type": "java.lang.String",
+      "description": "send workweixin user.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.WorkWeixinConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.workweixin.applicationId",
+      "type": "java.lang.String",
+      "description": "send workweixin applicationId.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.WorkWeixinConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.workweixin.corpid",
+      "type": "java.lang.String",
+      "description": "send workweixin corpid.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.WorkWeixinConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.workweixin.corpsecret",
+      "type": "java.lang.String",
+      "description": "send workweixin corpsecret.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.WorkWeixinConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.enabled",
+      "type": "java.lang.Boolean",
+      "description": "enabled send mail.",
+      "defaultValue": false,
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.smtpHost",
+      "type": "java.lang.String",
+      "description": "send mail smtp host.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.smtpPort",
+      "type": "java.lang.String",
+      "description": "send mail smtp port.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.to",
+      "type": "java.lang.String",
+      "description": "send mail to.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.from",
+      "type": "java.lang.String",
+      "description": "send mail from.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.username",
+      "type": "java.lang.String",
+      "description": "send mail username.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.password",
+      "type": "java.lang.String",
+      "description": "send mail password.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.ssl",
+      "type": "java.lang.Boolean",
+      "description": "send mail enable ssl.",
+      "defaultValue": true,
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn.mail.debug",
+      "type": "java.lang.Boolean",
+      "description": "send mail enable debug.",
+      "defaultValue": false,
+      "sourceType": "com.future94.alarm.log.autoconfigure.MailConfig"
+    }
+  ]
+}

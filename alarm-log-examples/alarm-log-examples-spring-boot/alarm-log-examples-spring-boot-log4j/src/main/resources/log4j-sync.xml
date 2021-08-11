@@ -1,0 +1,21 @@
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="Console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%p] %m  >> %c:%L%n"/>
+        </layout>
+    </appender>
+
+    <!--这里替换成AspectLog4jAsyncAppender-->
+    <appender name="AlarmLog" class="com.future94.alarm.log.core.enhance.log4j.AlarmLogLog4jAsyncAppender">
+        <param name="doWarnException" value="false"/>
+        <param name="warnExceptionExtend" value="java.lang.Exception,java.lang.RuntimeException"/>
+        <appender-ref ref="Console"/>
+    </appender>
+
+    <root>
+        <priority value="info" />
+        <appender-ref ref="Console"/>
+        <appender-ref ref="AlarmLog"/>
+    </root>
+</log4j:configuration>
