@@ -38,26 +38,30 @@ public class AlarmAspect {
     @AfterThrowing(value = "pointcut()", throwing = "ex")
     public void doRetryProcess(JoinPoint joinPoint, Throwable ex) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Alarm alarm = signature.getMethod().getAnnotation(Alarm.class);
-        if (Objects.isNull(alarm)) {
-            alarm = signature.getMethod().getDeclaringClass().getAnnotation(Alarm.class);
-        }
-        Class<? extends Throwable>[] doExtendWarnExceptionClasses = alarm.doWarnException();
-        boolean doWarnProcess;
-        if (alarm.warnExceptionExtend()) {
-            doWarnProcess = ExceptionUtils.doWarnExceptionExtend(ex, Arrays.asList(doExtendWarnExceptionClasses));
-        } else {
-            List<String> doWarnExceptionList = new ArrayList<>(doExtendWarnExceptionClasses.length);
-            for (Class<? extends Throwable> exceptionClass : doExtendWarnExceptionClasses) {
-                doWarnExceptionList.add(exceptionClass.getName());
-            }
-            doWarnProcess = ExceptionUtils.doWarnExceptionName(ex, doWarnExceptionList);
-        }
-        if (doWarnProcess
+        Alarm alarmMethod = signature.getMethod().getAnnotation(Alarm.class);
+        Alarm alarmClass = signature.getMethod().getDeclaringClass().getAnnotation(Alarm.class);
+        if (doWarnProcess(alarmMethod, ex)
+                || doWarnProcess(alarmClass, ex)
                 || AlarmLogContext.doWarnException(ex)
                 || ExceptionUtils.doWarnExceptionInstance(ex)) {
             executorService.execute(() -> AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(ex)));
         }
         throw ex;
+    }
+
+    private boolean doWarnProcess(Alarm alarm, Throwable ex) {
+        if (Objects.isNull(alarm)) {
+            return false;
+        }
+        Class<? extends Throwable>[] doExtendWarnExceptionClasses = alarm.doWarnException();
+        if (alarm.warnExceptionExtend()) {
+            return ExceptionUtils.doWarnExceptionExtend(ex, Arrays.asList(doExtendWarnExceptionClasses));
+        } else {
+            List<String> doWarnExceptionList = new ArrayList<>(doExtendWarnExceptionClasses.length);
+            for (Class<? extends Throwable> exceptionClass : doExtendWarnExceptionClasses) {
+                doWarnExceptionList.add(exceptionClass.getName());
+            }
+            return ExceptionUtils.doWarnExceptionName(ex, doWarnExceptionList);
+        }
     }
 }
