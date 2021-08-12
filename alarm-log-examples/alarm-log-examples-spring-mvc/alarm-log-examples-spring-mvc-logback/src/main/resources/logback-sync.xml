@@ -15,7 +15,6 @@
     </appender>
 
     <root level="INFO">
-        <appender-ref ref="Console" />
         <appender-ref ref="AlarmLog" level="ERROR" />
     </root>
 </configuration>

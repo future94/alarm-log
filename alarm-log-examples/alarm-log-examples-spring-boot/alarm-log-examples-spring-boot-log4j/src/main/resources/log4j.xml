@@ -8,9 +8,8 @@
 
     <!--这里替换成AspectLog4jAsyncAppender-->
     <appender name="AlarmLog" class="com.future94.alarm.log.core.enhance.log4j.AlarmLogLog4jAsyncAppender">
-        <param name="doWarnException" value="false"/>
-        <param name="warnExceptionExtend" value="java.lang.Exception,java.lang.RuntimeException"/>
-        <appender-ref ref="Console"/>
+        <param name="warnExceptionExtend" value="false"/>
+        <param name="doWarnException" value="java.lang.Exception,java.lang.RuntimeException"/>
     </appender>
 
     <appender name="AsyncConsole" class="org.apache.log4j.AsyncAppender">

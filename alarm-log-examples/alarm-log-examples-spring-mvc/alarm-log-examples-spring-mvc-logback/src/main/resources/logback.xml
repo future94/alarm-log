@@ -13,20 +13,12 @@
         <appender-ref ref="Console"/>
     </appender>
 
-    <appender name="AsyncConsole" class="ch.qos.logback.classic.AsyncAppender">
-        <discardingThreshold>0</discardingThreshold>
-        <appender-ref ref="Console"/>
-    </appender>
-
-
     <appender name="AsyncAlarmLog" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <appender-ref ref="AlarmLog"/>
     </appender>
 
-
     <root level="INFO">
-        <appender-ref ref="AsyncConsole" />
         <appender-ref ref="AsyncAlarmLog" level="ERROR" />
     </root>
 </configuration>
