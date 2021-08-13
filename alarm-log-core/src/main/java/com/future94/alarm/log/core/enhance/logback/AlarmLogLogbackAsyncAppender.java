@@ -18,14 +18,14 @@ import java.util.Optional;
 public class AlarmLogLogbackAsyncAppender extends AsyncAppender {
 
     /**
-     * parsing xml <doWarnException></doWarnException> param
+     * @param doWarnException parsing xml doWarnException param
      */
     public void setDoWarnException(String doWarnException) {
         Optional.ofNullable(doWarnException).ifPresent(className -> AlarmLogContext.addDoWarnExceptionList(Arrays.asList(className.split(","))));
     }
 
     /**
-     * parsing xml <warnExceptionExtend></warnExceptionExtend> param
+     * @param warnExceptionExtend parsing xml warnExceptionExtend param
      */
     public void setWarnExceptionExtend(Boolean warnExceptionExtend) {
         Optional.ofNullable(warnExceptionExtend).ifPresent(AlarmLogContext::setWarnExceptionExtend);
