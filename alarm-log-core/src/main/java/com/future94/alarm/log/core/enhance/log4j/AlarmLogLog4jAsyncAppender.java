@@ -26,8 +26,8 @@ public class AlarmLogLog4jAsyncAppender extends AsyncAppender {
     /**
      * parsing xml <warnExceptionExtend></warnExceptionExtend> param
      */
-    public void setWarnExceptionExtend(Boolean warnExceptionExtend) {
-        Optional.ofNullable(warnExceptionExtend).ifPresent(AlarmLogContext::setWarnExceptionExtend);
+    public void setWarnExceptionExtend(String warnExceptionExtend) {
+        Optional.ofNullable(warnExceptionExtend).map(Boolean::new).ifPresent(AlarmLogContext::setWarnExceptionExtend);
     }
 
     @Override
