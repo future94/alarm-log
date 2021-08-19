@@ -7,7 +7,7 @@
     <groupId>com.future94</groupId>
     <artifactId>alarm-log</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.SNAPSHOT</version>
 
     <name>alarm-log</name>
     <description>a lightweight log exception alert framework</description>
