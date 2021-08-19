@@ -1,5 +1,6 @@
 package com.future94.alarm.log.warn.common;
 
+import com.future94.alarm.log.common.dto.AlarmInfoContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +12,9 @@ public abstract class BaseWarnService implements AlarmLogWarnService {
     private final Logger logger = LoggerFactory.getLogger(BaseWarnService.class);
 
     @Override
-    public boolean send(Throwable throwable) {
+    public boolean send(AlarmInfoContext context, Throwable throwable) {
         try {
-            doSend(throwable);
+            doSend(context, throwable);
             return true;
         } catch (Exception e) {
             logger.error("send warn message error", e);
@@ -21,5 +22,5 @@ public abstract class BaseWarnService implements AlarmLogWarnService {
         }
     }
 
-    protected abstract void doSend(Throwable throwable) throws Exception;
+    protected abstract void doSend(AlarmInfoContext context, Throwable throwable) throws Exception;
 }

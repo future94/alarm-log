@@ -1,6 +1,7 @@
 package com.future94.alarm.log.core.enhance.log4j2;
 
 import com.future94.alarm.log.common.cache.AlarmLogContext;
+import com.future94.alarm.log.common.dto.AlarmInfoContext;
 import com.future94.alarm.log.common.utils.ExceptionUtils;
 import com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory;
 import org.apache.logging.log4j.core.Appender;
@@ -38,7 +39,18 @@ public class AlarmLog4j2AsyncAppender extends AbstractAppender {
         Throwable throwable = logEvent.getThrown();
         if (Objects.nonNull(throwable)
                 && (AlarmLogContext.doWarnException(throwable) || ExceptionUtils.doWarnExceptionInstance(throwable))) {
-            AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(throwable));
+            StackTraceElement stackTraceElement = throwable.getStackTrace()[0];
+            AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(
+                    AlarmInfoContext.builder()
+                            .message(logEvent.getMessage().getFormattedMessage())
+                            .throwableName(throwable.getClass().getName())
+                            .threadName(logEvent.getThreadName())
+                            .loggerName(logEvent.getLoggerName())
+                            .className(stackTraceElement.getClassName())
+                            .fileName(stackTraceElement.getFileName())
+                            .methodName(stackTraceElement.getMethodName())
+                            .lineNumber(stackTraceElement.getLineNumber()).build()
+                    , throwable));
         }
     }
 

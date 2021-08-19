@@ -1,6 +1,7 @@
 package com.future94.alarm.log.aspect;
 
 import com.future94.alarm.log.common.cache.AlarmLogContext;
+import com.future94.alarm.log.common.dto.AlarmInfoContext;
 import com.future94.alarm.log.common.thread.AlarmLogThreadFactory;
 import com.future94.alarm.log.common.utils.ExceptionUtils;
 import com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory;
@@ -44,7 +45,20 @@ public class AlarmAspect {
                 || doWarnProcess(alarmClass, ex)
                 || AlarmLogContext.doWarnException(ex)
                 || ExceptionUtils.doWarnExceptionInstance(ex)) {
-            executorService.execute(() -> AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(ex)));
+            String threadName = Thread.currentThread().getName();
+            StackTraceElement stackTraceElement = ex.getStackTrace()[0];
+            executorService.execute(() -> AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(
+                    AlarmInfoContext.builder()
+                            .message(ex.getMessage())
+                            .throwableName(ex.getClass().getName())
+                            .loggerName(joinPoint.getSignature().getDeclaringTypeName())
+                            .threadName(threadName)
+                            .fileName(stackTraceElement.getFileName())
+                            .lineNumber(stackTraceElement.getLineNumber())
+                            .methodName(stackTraceElement.getMethodName())
+                            .className(stackTraceElement.getClassName())
+                            .build()
+                    , ex)));
         }
         throw ex;
     }

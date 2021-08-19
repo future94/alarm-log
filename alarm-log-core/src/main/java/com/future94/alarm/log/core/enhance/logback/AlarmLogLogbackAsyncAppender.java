@@ -5,6 +5,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.classic.spi.ThrowableProxy;
 import com.future94.alarm.log.common.cache.AlarmLogContext;
+import com.future94.alarm.log.common.dto.AlarmInfoContext;
 import com.future94.alarm.log.common.utils.ExceptionUtils;
 import com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory;
 
@@ -40,7 +41,18 @@ public class AlarmLogLogbackAsyncAppender extends AsyncAppender {
                 Throwable throwable = throwableProxy.getThrowable();
                 if (AlarmLogContext.doWarnException(throwable)
                         || ExceptionUtils.doWarnExceptionInstance(throwable)) {
-                    AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(throwable));
+                    StackTraceElement stackTraceElement = throwable.getStackTrace()[0];
+                    AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(
+                            AlarmInfoContext.builder()
+                                    .message(loggingEvent.getFormattedMessage())
+                                    .throwableName(throwable.getClass().getName())
+                                    .threadName(loggingEvent.getThreadName())
+                                    .loggerName(loggingEvent.getLoggerName())
+                                    .className(stackTraceElement.getClassName())
+                                    .fileName(stackTraceElement.getFileName())
+                                    .methodName(stackTraceElement.getMethodName())
+                                    .lineNumber(stackTraceElement.getLineNumber()).build()
+                            , throwable));
                 }
             }
         }

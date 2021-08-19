@@ -1,5 +1,6 @@
 package com.future94.alarm.log.warn.workweixin;
 
+import com.future94.alarm.log.common.dto.AlarmInfoContext;
 import com.future94.alarm.log.common.utils.OkHttpUtils;
 import com.future94.alarm.log.common.utils.ThrowableUtils;
 import com.future94.alarm.log.warn.common.BaseWarnService;
@@ -102,7 +103,7 @@ public class WorkWeixinWarnService extends BaseWarnService {
     }
 
     @Override
-    protected void doSend(Throwable throwable) throws Exception {
+    protected void doSend(AlarmInfoContext context, Throwable throwable) throws Exception {
         String data = createPostData(toUser(to.split(",")), WorkWeixinSendMsgTypeEnum.TEXT.name(), ThrowableUtils.workWeixinContent(throwable));
         String url = String.format(SEND_MESSAGE_URL, getToken());
         String resp = OkHttpUtils.getInstance().post(url, data);

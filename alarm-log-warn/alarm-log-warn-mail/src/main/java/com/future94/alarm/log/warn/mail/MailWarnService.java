@@ -1,5 +1,6 @@
 package com.future94.alarm.log.warn.mail;
 
+import com.future94.alarm.log.common.dto.AlarmInfoContext;
 import com.future94.alarm.log.common.utils.ThrowableUtils;
 import com.future94.alarm.log.warn.common.BaseWarnService;
 
@@ -58,7 +59,7 @@ public class MailWarnService extends BaseWarnService {
     }
 
     @Override
-    protected void doSend(Throwable throwable) throws Exception {
+    protected void doSend(AlarmInfoContext context, Throwable throwable) throws Exception {
         Properties props = new Properties();
         props.setProperty("mail.smtp.auth", "true");
         props.setProperty("mail.transport.protocol", "smtp");
