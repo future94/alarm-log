@@ -20,6 +20,8 @@ spring:
                 token: xxx
                 secret: xxx
         warn-exception-extend: false
+        simple-warn-info: false
+        print-stack-trace: true
         do-warn-exception:
             - java.lang.Throwable
 server:

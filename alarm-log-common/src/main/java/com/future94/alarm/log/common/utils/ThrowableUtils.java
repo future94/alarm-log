@@ -1,5 +1,6 @@
 package com.future94.alarm.log.common.utils;
 
+import com.future94.alarm.log.common.cache.AlarmLogContext;
 import com.future94.alarm.log.common.dto.AlarmInfoContext;
 
 import java.util.HashMap;
@@ -31,9 +32,15 @@ public class ThrowableUtils {
     private static String defaultContent(AlarmInfoContext context, Throwable throwable, String separator) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(context.getMessage()).append(separator);
-        stringBuilder.append("异常:").append(context.getThrowableName()).append(separator);
-        stringBuilder.append("线程:").append(context.getThreadName()).append(separator);
-        stringBuilder.append("位置信息:").append(context.getClassName()).append(".").append(context.getMethodName()).append(isNativeMethod(context.getLineNumber()) ? "(Native Method)" : context.getFileName() != null && context.getLineNumber() >= 0 ? "(" + context.getFileName() + ":" + context.getLineNumber() + ")" : context.getFileName() != null ? "(" + context.getFileName() + ")" : "(Unknown Source)");
+        if (!AlarmLogContext.getSimpleWarnInfo()) {
+            stringBuilder.append("异常:").append(context.getThrowableName()).append(separator);
+            stringBuilder.append("线程:").append(context.getThreadName()).append(separator);
+            stringBuilder.append("位置信息:").append(context.getClassName()).append(".").append(context.getMethodName()).append(isNativeMethod(context.getLineNumber()) ? "(Native Method)" : context.getFileName() != null && context.getLineNumber() >= 0 ? "(" + context.getFileName() + ":" + context.getLineNumber() + ")" : context.getFileName() != null ? "(" + context.getFileName() + ")" : "(Unknown Source)");
+            stringBuilder.append(separator);
+        }
+        if (AlarmLogContext.getPrintStackTrace()) {
+            stringBuilder.append(printTrace(throwable));
+        }
         return stringBuilder.toString();
     }
 

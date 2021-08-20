@@ -12,6 +12,10 @@ import java.util.List;
 @ConfigurationProperties(prefix = "spring.alarm-log")
 public class AlarmLogConfig {
 
+    private Boolean printStackTrace = false;
+
+    private Boolean simpleWarnInfo = false;
+
     private Boolean warnExceptionExtend = false;
 
     private List<String> doWarnException;

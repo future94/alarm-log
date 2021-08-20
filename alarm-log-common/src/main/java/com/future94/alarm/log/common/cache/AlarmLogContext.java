@@ -14,11 +14,31 @@ public class AlarmLogContext {
 
     private static final Logger logger = LoggerFactory.getLogger(AlarmLogContext.class);
 
+    private static Boolean printStackTrace = false;
+
+    private static Boolean simpleWarnInfo = false;
+
     private static Boolean warnExceptionExtend = false;
 
     private static List<String> doWarnExceptionList = new ArrayList<>();
 
     private static List<Class<? extends Throwable>> doExtendWarnExceptionList = new ArrayList<>();
+
+    public static Boolean getPrintStackTrace() {
+        return printStackTrace;
+    }
+
+    public static void setPrintStackTrace(Boolean printStackTrace) {
+        AlarmLogContext.printStackTrace = printStackTrace;
+    }
+
+    public static Boolean getSimpleWarnInfo() {
+        return simpleWarnInfo;
+    }
+
+    public static void setSimpleWarnInfo(Boolean simpleWarnInfo) {
+        AlarmLogContext.simpleWarnInfo = simpleWarnInfo;
+    }
 
     public static Boolean getWarnExceptionExtend() {
         return warnExceptionExtend;

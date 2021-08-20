@@ -41,6 +41,8 @@
     </bean>
 
     <bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.cache.AlarmLogContext">
+        <property name="printStackTrace" value="true" />
+        <property name="simpleWarnInfo" value="false" />
         <property name="warnExceptionExtend" value="true" />
         <property name="doWarnExceptionList">
             <list>

@@ -7,6 +7,27 @@
       "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
     },
     {
+      "name": "spring.alarm-log.print-stack-trace",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "enabled warn message print stack trace.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
+    },
+    {
+      "name": "spring.alarm-log.simple-warn-info",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "enabled simple warn message info.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
+    },
+    {
+      "name": "spring.alarm-log.warn-exception-extend",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "extend do warn exception.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
+    },
+    {
       "name": "spring.alarm-log.warn.dingtalk.enabled",
       "type": "java.lang.Boolean",
       "defaultValue": false,

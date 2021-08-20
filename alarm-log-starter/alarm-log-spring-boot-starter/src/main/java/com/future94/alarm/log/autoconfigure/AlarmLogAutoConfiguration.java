@@ -1,10 +1,10 @@
 package com.future94.alarm.log.autoconfigure;
 
+import com.future94.alarm.log.common.cache.AlarmLogContext;
 import com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory;
 import com.future94.alarm.log.warn.dingtalk.DingtalkWarnService;
-import com.future94.alarm.log.warn.workweixin.WorkWeixinWarnService;
-import com.future94.alarm.log.common.cache.AlarmLogContext;
 import com.future94.alarm.log.warn.mail.MailWarnService;
+import com.future94.alarm.log.warn.workweixin.WorkWeixinWarnService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,6 +26,9 @@ public class AlarmLogAutoConfiguration {
     @Autowired
     void setAlarmLogConfig(AlarmLogConfig alarmLogConfig) {
         Optional.ofNullable(alarmLogConfig.getDoWarnException()).ifPresent(AlarmLogContext::addDoWarnExceptionList);
+        Optional.ofNullable(alarmLogConfig.getWarnExceptionExtend()).ifPresent(AlarmLogContext::setWarnExceptionExtend);
+        Optional.ofNullable(alarmLogConfig.getPrintStackTrace()).ifPresent(AlarmLogContext::setPrintStackTrace);
+        Optional.ofNullable(alarmLogConfig.getSimpleWarnInfo()).ifPresent(AlarmLogContext::setSimpleWarnInfo);
     }
 
     @Configuration
