@@ -73,7 +73,7 @@ public class MailWarnService extends BaseWarnService {
         for (String toUser : to.split(",")) {
             msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toUser));
         }
-        Map<String, String> map = ThrowableUtils.mailSubjectContent(throwable);
+        Map<String, String> map = ThrowableUtils.mailSubjectContent(context, throwable);
         msg.setSubject(map.get("subject"), "UTF-8");
         msg.setContent(map.get("content"), "text/html;charset=UTF-8");
         msg.setSentDate(new Date());

@@ -104,7 +104,7 @@ public class WorkWeixinWarnService extends BaseWarnService {
 
     @Override
     protected void doSend(AlarmInfoContext context, Throwable throwable) throws Exception {
-        String data = createPostData(toUser(to.split(",")), WorkWeixinSendMsgTypeEnum.TEXT.name(), ThrowableUtils.workWeixinContent(throwable));
+        String data = createPostData(toUser(to.split(",")), WorkWeixinSendMsgTypeEnum.TEXT.name(), ThrowableUtils.workWeixinContent(context, throwable));
         String url = String.format(SEND_MESSAGE_URL, getToken());
         String resp = OkHttpUtils.getInstance().post(url, data);
         logger.info("send work weixin message call [{}], param:{}, resp:{}", url, data, resp);

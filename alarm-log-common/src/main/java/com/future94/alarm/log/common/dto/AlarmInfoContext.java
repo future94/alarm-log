@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Accessors(chain = true, fluent = true)
+@Accessors(chain = true)
 public class AlarmInfoContext {
 
     private String message;
