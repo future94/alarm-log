@@ -1,4 +1,4 @@
-package com.future94.alarm.log.common.dto;
+package com.future94.alarm.log.common.context;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.future94.alarm.log.core.enhance.log4j2;
 
-import com.future94.alarm.log.common.cache.AlarmLogContext;
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmLogContext;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
 import com.future94.alarm.log.common.utils.ExceptionUtils;
 import com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory;
 import org.apache.logging.log4j.core.Appender;

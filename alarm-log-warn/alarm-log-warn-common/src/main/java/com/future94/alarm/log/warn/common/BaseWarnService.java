@@ -1,6 +1,6 @@
 package com.future94.alarm.log.warn.common;
 
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

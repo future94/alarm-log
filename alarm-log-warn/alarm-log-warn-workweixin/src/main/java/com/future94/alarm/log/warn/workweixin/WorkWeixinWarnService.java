@@ -1,10 +1,10 @@
 package com.future94.alarm.log.warn.workweixin;
 
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmLogContext;
 import com.future94.alarm.log.common.utils.OkHttpUtils;
-import com.future94.alarm.log.common.utils.ThrowableUtils;
-import com.future94.alarm.log.warn.common.BaseWarnService;
 import com.future94.alarm.log.common.utils.Pair;
+import com.future94.alarm.log.warn.common.BaseWarnService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
@@ -104,7 +104,7 @@ public class WorkWeixinWarnService extends BaseWarnService {
 
     @Override
     protected void doSend(AlarmInfoContext context, Throwable throwable) throws Exception {
-        String data = createPostData(toUser(to.split(",")), WorkWeixinSendMsgTypeEnum.TEXT.name(), ThrowableUtils.workWeixinContent(context, throwable));
+        String data = createPostData(toUser(to.split(",")), WorkWeixinSendMsgTypeEnum.TEXT.name(), AlarmLogContext.getAlarmMessageContext().workWeixinContent(context, throwable, AlarmLogContext.getSimpleConfig()));
         String url = String.format(SEND_MESSAGE_URL, getToken());
         String resp = OkHttpUtils.getInstance().post(url, data);
         logger.info("send work weixin message call [{}], param:{}, resp:{}", url, data, resp);

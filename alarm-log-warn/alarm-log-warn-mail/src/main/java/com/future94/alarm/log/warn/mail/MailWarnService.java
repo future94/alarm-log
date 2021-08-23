@@ -1,7 +1,8 @@
 package com.future94.alarm.log.warn.mail;
 
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
-import com.future94.alarm.log.common.utils.ThrowableUtils;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmLogContext;
+import com.future94.alarm.log.common.dto.AlarmMailContent;
 import com.future94.alarm.log.warn.common.BaseWarnService;
 
 import javax.mail.Session;
@@ -9,7 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
-import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -73,9 +73,9 @@ public class MailWarnService extends BaseWarnService {
         for (String toUser : to.split(",")) {
             msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toUser));
         }
-        Map<String, String> map = ThrowableUtils.mailSubjectContent(context, throwable);
-        msg.setSubject(map.get("subject"), "UTF-8");
-        msg.setContent(map.get("content"), "text/html;charset=UTF-8");
+        AlarmMailContent alarmMailContent = AlarmLogContext.getAlarmMessageContext().mailContent(context, throwable, AlarmLogContext.getSimpleConfig());
+        msg.setSubject(alarmMailContent.getSubject(), "UTF-8");
+        msg.setContent(alarmMailContent.getContent(), "text/html;charset=UTF-8");
         msg.setSentDate(new Date());
         Transport transport = session.getTransport();
         transport.connect(username, password);

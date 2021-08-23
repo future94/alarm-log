@@ -1,3 +1,6 @@
+- github: https://github.com/future94/alarm-log
+- gitee : https://gitee.com/future94/alarm-log
+
 ## 1. 日志监控报警
 **核心功能**：
 - 监控日志中抛出的指定异常或者方法与类中抛出的指定异常，发送到钉钉、企业微信、邮箱等。
@@ -549,7 +552,7 @@ spring:
 - spring.alarm-log.**do-warn-exception** : 获取日志中指定的异常类全路径信息，类型为List.
 - spring.alarm-log.**warn-exception-extend** : 获取日志中指定异常信息是否启动继承判断。如：do-warn-exception为java.lang.Throwable，warn-exception-extend为true，则所有java.lang.Throwable的子类（java.lang.Exception、java.lang.RuntimeException、java.io.IOException等）都会触发警告事件。
 ```xml
-<bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.cache.AlarmLogContext">
+<bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.context.AlarmLogContext">
     <property name="warnExceptionExtend" value="true" />
     <property name="doWarnExceptionList">
         <list>
@@ -723,4 +726,88 @@ public class TestController {
         </list>
     </constructor-arg>
 </bean>
+```
+
+## 4. 自定义发送信息内容
+
+### 4.1 自定义发送内容
+- 实现`com.future94.alarm.log.common.context.AlarmMessageContext`接口
+- 继承`com.future94.alarm.log.common.context.DefaultAlarmMessageContext`类
+
+如果你想自定义所有报警发送的内容，你可以实现`AlarmMessageContext`接口，如果你只想自定义指定渠道的内容，你可以继承`DefaultAlarmMessageContext`类.
+
+### 4.2 框架识别
+
+#### 4.2.1 SpringBoot
+```java
+@Component
+public class CustomAlarmMessageContext1 implements AlarmMessageContext {
+
+    @Override
+    public String workWeixinContent(AlarmInfoContext context, Throwable throwable, AlarmLogSimpleConfig config) {
+        // TODO send content
+        return null;
+    }
+
+    @Override
+    public String dingtalkContent(AlarmInfoContext context, Throwable throwable, AlarmLogSimpleConfig config) {
+        // TODO send content
+        return null;
+    }
+
+    @Override
+    public AlarmMailContent mailContent(AlarmInfoContext context, Throwable throwable, AlarmLogSimpleConfig config) {
+        // TODO send content
+        return null;
+    }
+}
+```
+
+#### 4.2.2 SpringMVC
+
+需要注入到AlarmLogContext中，像下面这样。
+```java
+@Component
+public class CustomAlarmMessageContext1 implements AlarmMessageContext, InitializingBean {
+
+    @Override
+    public String workWeixinContent(AlarmInfoContext context, Throwable throwable, AlarmLogSimpleConfig config) {
+        // TODO send content
+        return null;
+    }
+
+    @Override
+    public String dingtalkContent(AlarmInfoContext context, Throwable throwable, AlarmLogSimpleConfig config) {
+        // TODO send content
+        return null;
+    }
+
+    @Override
+    public AlarmMailContent mailContent(AlarmInfoContext context, Throwable throwable, AlarmLogSimpleConfig config) {
+        // TODO send content
+        return null;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        AlarmLogContext.setAlarmMessageContext(this);
+    }
+}
+```
+
+或者在xml中配置。
+
+```xml
+<bean id="context1" class="com.future94.alarm.log.examples.spring.mvc.log4j.bean.CustomAlarmMessageContext1" />
+
+<bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.context.AlarmLogContext">
+    <property name="alarmMessageContext" ref="context1"/>
+</bean>
+```
+
+#### 4.2.3 非Spring
+
+将自定义内容注入到AlarmLogContext中即可。
+```java
+AlarmLogContext.setAlarmMessageContext(new AlarmMessageContext());
 ```

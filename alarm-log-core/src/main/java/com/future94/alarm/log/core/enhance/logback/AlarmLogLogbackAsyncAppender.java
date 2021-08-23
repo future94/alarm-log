@@ -4,8 +4,8 @@ import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.classic.spi.ThrowableProxy;
-import com.future94.alarm.log.common.cache.AlarmLogContext;
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmLogContext;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
 import com.future94.alarm.log.common.utils.ExceptionUtils;
 import com.future94.alarm.log.warn.common.factory.AlarmLogWarnServiceFactory;
 

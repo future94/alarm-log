@@ -1,10 +1,8 @@
 package com.future94.alarm.log.common.utils;
 
-import com.future94.alarm.log.common.cache.AlarmLogContext;
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmLogContext;
+import com.future94.alarm.log.common.dto.AlarmMailContent;
 
 /**
  * @author weilai
@@ -22,11 +20,8 @@ public class ThrowableUtils {
         return defaultContent(context, throwable, SEPARATOR);
     }
 
-    public static Map<String, String> mailSubjectContent(AlarmInfoContext context, Throwable throwable) {
-        Map<String, String> result = new HashMap<>(2);
-        result.put("subject", context.getMessage());
-        result.put("content", defaultContent(context, throwable, HTML_SEPARATOR));
-        return result;
+    public static AlarmMailContent mailSubjectContent(AlarmInfoContext context, Throwable throwable) {
+        return new AlarmMailContent(context.getMessage(), defaultContent(context, throwable, HTML_SEPARATOR));
     }
 
     private static String defaultContent(AlarmInfoContext context, Throwable throwable, String separator) {

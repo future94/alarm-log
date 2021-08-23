@@ -1,6 +1,7 @@
 package com.future94.alarm.log.warn.dingtalk;
 
-import com.future94.alarm.log.common.dto.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmInfoContext;
+import com.future94.alarm.log.common.context.AlarmLogContext;
 import com.future94.alarm.log.common.utils.OkHttpUtils;
 import com.future94.alarm.log.common.utils.ThrowableUtils;
 import com.future94.alarm.log.warn.common.BaseWarnService;
@@ -56,7 +57,7 @@ public class DingtalkWarnService extends BaseWarnService {
 
     @Override
     protected void doSend(AlarmInfoContext context, Throwable throwable) throws Exception {
-        String resp = sendRobotMessage(ThrowableUtils.dingtalkContent(context, throwable));
+        String resp = sendRobotMessage(AlarmLogContext.getAlarmMessageContext().dingtalkContent(context, throwable, AlarmLogContext.getSimpleConfig()));
         logger.info("send dingtalk message resp:{}", resp);
     }
 }

@@ -1,11 +1,15 @@
-package com.future94.alarm.log.common.cache;
+package com.future94.alarm.log.common.context;
 
+import com.future94.alarm.log.common.dto.AlarmLogSimpleConfig;
 import com.future94.alarm.log.common.utils.ExceptionUtils;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author weilai
@@ -14,8 +18,12 @@ public class AlarmLogContext {
 
     private static final Logger logger = LoggerFactory.getLogger(AlarmLogContext.class);
 
+    @Getter
+    @Setter
     private static Boolean printStackTrace = false;
 
+    @Getter
+    @Setter
     private static Boolean simpleWarnInfo = false;
 
     private static Boolean warnExceptionExtend = false;
@@ -24,20 +32,17 @@ public class AlarmLogContext {
 
     private static List<Class<? extends Throwable>> doExtendWarnExceptionList = new ArrayList<>();
 
-    public static Boolean getPrintStackTrace() {
-        return printStackTrace;
-    }
+    @Getter
+    @Setter
+    private static AlarmMessageContext alarmMessageContext = new DefaultAlarmMessageContext();
 
-    public static void setPrintStackTrace(Boolean printStackTrace) {
-        AlarmLogContext.printStackTrace = printStackTrace;
-    }
+    private static AlarmLogSimpleConfig simpleConfig;
 
-    public static Boolean getSimpleWarnInfo() {
-        return simpleWarnInfo;
-    }
-
-    public static void setSimpleWarnInfo(Boolean simpleWarnInfo) {
-        AlarmLogContext.simpleWarnInfo = simpleWarnInfo;
+    public static AlarmLogSimpleConfig getSimpleConfig () {
+        if (Objects.isNull(simpleConfig)) {
+            simpleConfig = AlarmLogSimpleConfig.builder().printStackTrace(printStackTrace).simpleWarnInfo(simpleWarnInfo).build();
+        }
+        return simpleConfig;
     }
 
     public static Boolean getWarnExceptionExtend() {

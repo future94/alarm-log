@@ -16,7 +16,7 @@ spring:
                 corpid: xxx
                 corpsecret: xxx
             dingtalk:
-                enabled: true
+                enabled: false
                 token: xxx
                 secret: xxx
         warn-exception-extend: false
