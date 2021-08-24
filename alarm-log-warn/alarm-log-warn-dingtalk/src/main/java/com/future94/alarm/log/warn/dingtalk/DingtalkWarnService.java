@@ -59,5 +59,6 @@ public class DingtalkWarnService extends BaseWarnService {
     protected void doSend(AlarmInfoContext context, Throwable throwable) throws Exception {
         String resp = sendRobotMessage(AlarmLogContext.getAlarmMessageContext().dingtalkContent(context, throwable, AlarmLogContext.getSimpleConfig()));
         logger.info("send dingtalk message resp:{}", resp);
+        throw new RuntimeException();
     }
 }

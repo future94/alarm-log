@@ -46,6 +46,8 @@
 
 
 <!--    <bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.context.AlarmLogContext">-->
+<!--        <property name="maxRetryTimes" value="1" />-->
+<!--        <property name="retrySleepMillis" value="3000" />-->
 <!--        <property name="printStackTrace" value="true" />-->
 <!--        <property name="simpleWarnInfo" value="false" />-->
 <!--        <property name="warnExceptionExtend" value="true" />-->
