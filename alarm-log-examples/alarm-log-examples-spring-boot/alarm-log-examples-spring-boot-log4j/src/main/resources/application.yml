@@ -22,6 +22,8 @@ spring:
         warn-exception-extend: false
         simple-warn-info: false
         print-stack-trace: true
+        max-retry-times: 1
+        retry-sleep-millis: 3000
         do-warn-exception:
             - java.lang.Throwable
 server:

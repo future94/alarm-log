@@ -20,6 +20,14 @@ public class AlarmLogContext {
 
     @Getter
     @Setter
+    private static int maxRetryTimes = 3;
+
+    @Getter
+    @Setter
+    private static int retrySleepMillis = 1000;
+
+    @Getter
+    @Setter
     private static Boolean printStackTrace = false;
 
     @Getter

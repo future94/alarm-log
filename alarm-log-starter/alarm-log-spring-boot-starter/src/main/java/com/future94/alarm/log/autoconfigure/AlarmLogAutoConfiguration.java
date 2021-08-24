@@ -25,19 +25,6 @@ import java.util.Optional;
 @EnableConfigurationProperties(AlarmLogConfig.class)
 public class AlarmLogAutoConfiguration {
 
-    @Autowired
-    void setAlarmLogConfig(AlarmLogConfig alarmLogConfig) {
-        Optional.ofNullable(alarmLogConfig.getDoWarnException()).ifPresent(AlarmLogContext::addDoWarnExceptionList);
-        Optional.ofNullable(alarmLogConfig.getWarnExceptionExtend()).ifPresent(AlarmLogContext::setWarnExceptionExtend);
-        Optional.ofNullable(alarmLogConfig.getPrintStackTrace()).ifPresent(AlarmLogContext::setPrintStackTrace);
-        Optional.ofNullable(alarmLogConfig.getSimpleWarnInfo()).ifPresent(AlarmLogContext::setSimpleWarnInfo);
-    }
-
-    @Autowired
-    void setAlarmMessageContext(ObjectProvider<AlarmMessageContext> alarmMessageContext) {
-        alarmMessageContext.ifAvailable(AlarmLogContext::setAlarmMessageContext);
-    }
-
     @Configuration
     @ConditionalOnProperty(name = "spring.alarm-log.warn.mail.enabled", havingValue = "true")
     @EnableConfigurationProperties(MailConfig.class)
@@ -89,6 +76,28 @@ public class AlarmLogAutoConfiguration {
         @Autowired
         void setDataChangedListener(DingtalkWarnService dingtalkWarnService) {
             AlarmLogWarnServiceFactory.setAlarmLogWarnService(dingtalkWarnService);
+        }
+    }
+
+    /**
+     * The code position is important, in order after BaseWarnService.
+     */
+    @Configuration
+    static class AlarmLogInit {
+
+        @Autowired
+        void setAlarmLogConfig(AlarmLogConfig alarmLogConfig) {
+            Optional.ofNullable(alarmLogConfig.getDoWarnException()).ifPresent(AlarmLogContext::addDoWarnExceptionList);
+            Optional.ofNullable(alarmLogConfig.getWarnExceptionExtend()).ifPresent(AlarmLogContext::setWarnExceptionExtend);
+            Optional.ofNullable(alarmLogConfig.getPrintStackTrace()).ifPresent(AlarmLogContext::setPrintStackTrace);
+            Optional.ofNullable(alarmLogConfig.getSimpleWarnInfo()).ifPresent(AlarmLogContext::setSimpleWarnInfo);
+            Optional.ofNullable(alarmLogConfig.getMaxRetryTimes()).ifPresent(AlarmLogContext::setMaxRetryTimes);
+            Optional.ofNullable(alarmLogConfig.getRetrySleepMillis()).ifPresent(AlarmLogContext::setRetrySleepMillis);
+        }
+
+        @Autowired
+        void setAlarmMessageContext(ObjectProvider<AlarmMessageContext> alarmMessageContext) {
+            alarmMessageContext.ifAvailable(AlarmLogContext::setAlarmMessageContext);
         }
     }
 }

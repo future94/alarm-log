@@ -342,6 +342,17 @@ spring:
                 secret: xxx
 ```
 
+### 2.5 配置警告消息发送异常重试
+
+- maxRetryTimes : 最大重试次数
+- retrySleepMillis : 每次重试等待间隔，最终效果【retrySleepMillis * ( 1 << maxRetryTimes )】
+```yaml
+spring:
+    alarm-log:
+        max-retry-times: 1
+        retry-sleep-millis: 3000
+```
+
 ## 3. SpringMvc
 
 具体示例可以查看`alarm-log-examples-spring-mv`包
@@ -725,6 +736,17 @@ public class TestController {
             <ref bean="dingtalkWarnService" />
         </list>
     </constructor-arg>
+</bean>
+```
+
+### 3.5 配置警告消息发送异常重试
+
+- maxRetryTimes : 最大重试次数
+- retrySleepMillis : 每次重试等待间隔，最终效果【retrySleepMillis * ( 1 << maxRetryTimes )】
+```xml
+<bean id="alarmLogConfigContext" class="com.future94.alarm.log.common.context.AlarmLogContext">
+    <property name="maxRetryTimes" value="1" />
+    <property name="retrySleepMillis" value="3000" />
 </bean>
 ```
 

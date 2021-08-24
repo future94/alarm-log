@@ -7,6 +7,20 @@
       "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
     },
     {
+      "name": "spring.alarm-log.max-retry-times",
+      "type": "java.lang.Integer",
+      "defaultValue": 3,
+      "description": "send alarm message error max retry times.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
+    },
+    {
+      "name": "spring.alarm-log.retry-sleep-millis",
+      "type": "java.lang.Integer",
+      "defaultValue": 1000,
+      "description": "send alarm message error thread sleep millis.",
+      "sourceType": "com.future94.alarm.log.autoconfigure.AlarmLogConfig"
+    },
+    {
       "name": "spring.alarm-log.print-stack-trace",
       "type": "java.lang.Boolean",
       "defaultValue": false,
