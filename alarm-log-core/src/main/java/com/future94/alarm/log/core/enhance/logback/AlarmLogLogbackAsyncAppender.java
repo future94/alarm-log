@@ -45,6 +45,7 @@ public class AlarmLogLogbackAsyncAppender extends AsyncAppender {
                     AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(
                             AlarmInfoContext.builder()
                                     .message(loggingEvent.getFormattedMessage())
+                                    .level(loggingEvent.getLevel().toString())
                                     .throwableName(throwable.getClass().getName())
                                     .threadName(loggingEvent.getThreadName())
                                     .loggerName(loggingEvent.getLoggerName())
