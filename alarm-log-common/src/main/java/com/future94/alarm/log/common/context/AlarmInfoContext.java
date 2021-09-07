@@ -23,6 +23,8 @@ public class AlarmInfoContext {
     private String loggerName;
 
     private String threadName;
+
+    private String level;
     /**
      Caller's line number.
      */

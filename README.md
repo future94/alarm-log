@@ -833,3 +833,17 @@ public class CustomAlarmMessageContext1 implements AlarmMessageContext, Initiali
 ```java
 AlarmLogContext.setAlarmMessageContext(new AlarmMessageContext());
 ```
+
+
+## 5. 打印日志
+如果在非error日志时也想打印日志并且发送警告通知，可以使用下面的帮助类。
+
+`AlarmLogHelper.getPrintLogInstance()`，默认不发送消息，如果发送报警消息，可以使用`AlarmLogHelper.getPrintLogInstance(true)`。
+
+eg:
+```java
+AlarmLogHelper.getPrintLogInstance().error("123");
+AlarmLogHelper.getPrintLogInstance().error("123:{}", 456, new RuntimeException());
+AlarmLogHelper.getPrintLogInstance(true).error("123");
+AlarmLogHelper.getPrintLogInstance(true).error("123:{}", 456, new RuntimeException());
+```

@@ -42,6 +42,7 @@ public class AlarmLogLog4jAsyncAppender extends AsyncAppender {
                 AlarmLogWarnServiceFactory.getServiceList().forEach(alarmLogWarnService -> alarmLogWarnService.send(
                     AlarmInfoContext.builder()
                         .message(event.getRenderedMessage())
+                        .level(event.getLevel().toString())
                         .throwableName(throwable.getClass().getName())
                         .threadName(event.getThreadName())
                         .loggerName(event.getLoggerName())
